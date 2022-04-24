@@ -9,7 +9,7 @@ for i in a:
     if y % 2 != 0:
         mx += max(x,y)
         mn += min(x,y)
-        if x % 2 == 0:
+        if max(x,y) % 2 == 0:
             x0.append(x + y)
         else:
             x1.append(x + y)
