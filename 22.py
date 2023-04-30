@@ -1,16 +1,13 @@
-a = open('test').read().splitlines()
-arr = []
+a = open('test').read()
+a = a.replace(';', ' ').splitlines()
+ans = [0] * len(a)
 for i in a:
-    id, time, dep = i.split()
-    id = int(id)
-    time = int(time)
-    dep = list(map(int, dep.split(';')))
-    if dep[0] == 0:
-        arr.append(time)
+    i = i.split()
+    idd = int(i[0])
+    time = int(i[1])
+    sub = list(map(int, i[2:]))
+    if sub[0] == 0:
+        ans[idd - 1] = time
     else:
-        if len(dep) > 1:
-            mx = max([arr[dep[i] - 1] for i in range(len(dep))])
-            arr.append(time + mx)
-        else:
-            arr.append(time + arr[dep[0] - 1])
-print(max(arr))
+        ans[idd - 1] = max(ans[j - 1] for j in sub) + time
+print(max(ans))
